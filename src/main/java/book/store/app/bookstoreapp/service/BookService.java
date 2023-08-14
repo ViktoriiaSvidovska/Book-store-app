@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface BookService {
     BookResponseDto save(CreateBookRequestDto product);
+
     List<BookResponseDto> findAll();
+
     BookResponseDto findById(Long id);
 }
