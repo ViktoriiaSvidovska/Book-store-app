@@ -1,14 +1,14 @@
 package book.store.app.bookstoreapp.service.impl;
 
-import book.store.app.bookstoreapp.dto.BookResponseDto;
-import book.store.app.bookstoreapp.dto.BookSearchParametersDto;
-import book.store.app.bookstoreapp.dto.CreateBookRequestDto;
+import book.store.app.bookstoreapp.dto.book.BookResponseDto;
+import book.store.app.bookstoreapp.dto.book.BookSearchParametersDto;
+import book.store.app.bookstoreapp.dto.book.CreateBookRequestDto;
 import book.store.app.bookstoreapp.exception.EntityNotFoundException;
 import book.store.app.bookstoreapp.mapper.BookMapper;
 import book.store.app.bookstoreapp.model.Book;
-import book.store.app.bookstoreapp.book.BookRepository;
+import book.store.app.bookstoreapp.dto.book.BookRepository;
 import book.store.app.bookstoreapp.service.BookService;
-import book.store.app.bookstoreapp.book.BookSpecificationBuilder;
+import book.store.app.bookstoreapp.dto.book.BookSpecificationBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;

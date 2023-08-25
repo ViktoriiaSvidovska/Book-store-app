@@ -1,8 +1,8 @@
 package book.store.app.bookstoreapp.controller;
 
-import book.store.app.bookstoreapp.dto.BookResponseDto;
-import book.store.app.bookstoreapp.dto.BookSearchParametersDto;
-import book.store.app.bookstoreapp.dto.CreateBookRequestDto;
+import book.store.app.bookstoreapp.dto.book.BookResponseDto;
+import book.store.app.bookstoreapp.dto.book.BookSearchParametersDto;
+import book.store.app.bookstoreapp.dto.book.CreateBookRequestDto;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
 import book.store.app.bookstoreapp.service.BookService;
@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,6 +39,7 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Create a new book",
             description = "Add a new book to the library's collection with the provided details")
     public BookResponseDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {
@@ -45,6 +47,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(
             summary = "Update book",
             description = "Update information about the specific book in the library's collection")
@@ -61,6 +64,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(
             summary = "Delete book",
             description = "Remove a specific book from the library's collection")
