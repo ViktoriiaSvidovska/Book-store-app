@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = PasswordPatternValidator.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PasswordValidator {
+public @interface Password {
     String message() default "Invalid password";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

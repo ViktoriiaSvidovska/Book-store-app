@@ -2,7 +2,7 @@ package book.store.app.bookstoreapp.dto.user;
 
 
 import book.store.app.bookstoreapp.lib.FieldMatch;
-import book.store.app.bookstoreapp.lib.PasswordValidator;
+import book.store.app.bookstoreapp.lib.Password;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -21,7 +21,7 @@ public class UserRegistrationRequestDto {
 
     @NotBlank(message = "Password is required")
     @Size(min = 8, max = 25, message = "Password length must be between 8 and 20 characters")
-    @PasswordValidator(message = "Password must meet specific criteria")
+    @Password(message = "Password must meet specific criteria")
     private String password;
 
     @NotBlank(message = "Password confirmation is required")

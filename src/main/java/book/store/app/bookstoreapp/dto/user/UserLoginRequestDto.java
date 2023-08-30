@@ -1,6 +1,6 @@
 package book.store.app.bookstoreapp.dto.user;
 
-import book.store.app.bookstoreapp.lib.PasswordValidator;
+import book.store.app.bookstoreapp.lib.Password;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
@@ -9,7 +9,7 @@ public record UserLoginRequestDto(
         @Email(message = "Please enter a valid email address")
         String email,
 
-        @PasswordValidator (message = "Password must meet specific criteria")
+        @Password(message = "Password must meet specific criteria")
         String password
 ) {
 }
