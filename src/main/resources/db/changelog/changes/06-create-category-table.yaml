@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-book-table
+      id: create-category-table
       author: v
       changes:
         - createTable:
-            tableName: books
+            tableName: categories
             columns:
               - column:
                   name: id
@@ -14,34 +14,15 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: title
+                  name: name
                   type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: author
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: isbn
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-                    unique: true
-              - column:
-                  name: price
-                  type: decimal
                   constraints:
                     nullable: false
               - column:
                   name: description
                   type: varchar(255)
               - column:
-                  name: cover_image
-                  type: varchar(255)
-              - column:
-                  name: categories
+                  name: books
                   type: varchar(255)
                   constraints:
                     nullable: true
@@ -52,8 +33,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - addForeignKeyConstraint:
-            baseTableName: books
-            baseColumnNames: categories
-            referencedTableName: categories
-            referencedColumnNames: id
-            constraintName: fk_books_categories
+            baseTableName: categories
+            baseColumnNames: id
+            referencedTableName: books
+            referencedColumnNames: category_id
+            constraintName: fk_categories_books
