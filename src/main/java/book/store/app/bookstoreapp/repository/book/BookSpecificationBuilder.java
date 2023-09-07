@@ -1,5 +1,6 @@
-package book.store.app.bookstoreapp.dto.book;
+package book.store.app.bookstoreapp.repository.book;
 
+import book.store.app.bookstoreapp.dto.book.BookSearchParametersDto;
 import book.store.app.bookstoreapp.model.Book;
 import book.store.app.bookstoreapp.repository.SpecificationBuilder;
 import book.store.app.bookstoreapp.repository.SpecificationProviderManager;
@@ -17,12 +18,14 @@ public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
     @Override
     public Specification<Book> build(BookSearchParametersDto bookSearchParametersDto) {
         Specification<Book> specification = Specification.where(null);
-        if (bookSearchParametersDto.authors() != null && bookSearchParametersDto.authors().length > 0) {
+        if (bookSearchParametersDto.authors() != null
+                && bookSearchParametersDto.authors().length > 0) {
             specification = specification.and(bookSpecificationProviderManager
                     .getSpecificationProvider(AUTHOR)
                     .getSpecification(bookSearchParametersDto.authors()));
         }
-        if (bookSearchParametersDto.titles() != null && bookSearchParametersDto.titles().length > 0) {
+        if (bookSearchParametersDto.titles() != null
+                && bookSearchParametersDto.titles().length > 0) {
             specification = specification.and(bookSpecificationProviderManager
                     .getSpecificationProvider(TITLE)
                     .getSpecification(bookSearchParametersDto.titles()));

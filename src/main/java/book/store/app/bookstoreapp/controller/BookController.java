@@ -3,38 +3,45 @@ package book.store.app.bookstoreapp.controller;
 import book.store.app.bookstoreapp.dto.book.BookResponseDto;
 import book.store.app.bookstoreapp.dto.book.BookSearchParametersDto;
 import book.store.app.bookstoreapp.dto.book.CreateBookRequestDto;
+import book.store.app.bookstoreapp.service.BookService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.data.domain.Pageable;
-import java.util.List;
-import book.store.app.bookstoreapp.service.BookService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/books")
-@PreAuthorize("hasRole('ROLE_USER')")
+@RequestMapping("/books")
 @Tag(name = "Books", description = "Managing books")
 public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    @Operation(
-            summary = "Get all books",
-            description = "Get a list of all available books in the library's collection"
-    )
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @Operation(summary = "Get all books",
+            description = "Get a list of all available books in the library's collection")
     public List<BookResponseDto> getAllBooks(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(summary = "Find book by Id",
             description = "Obtain information about a book using its unique identifier")
     public BookResponseDto findById(@PathVariable Long id) {
@@ -42,11 +49,10 @@ public class BookController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Create a new book. <ONLY FOR ADMIN ROLE>",
             description = "Add a new book to the library's collection with the provided details")
-    @ApiResponse(responseCode = "201",
+    @ApiResponse(responseCode = "200",
             description = "Book created successfully",
             content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = BookResponseDto.class))})
@@ -68,8 +74,9 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    @Operation(summary = "Search for the book",
-            description = "Search for book in the library's collection based on the specified criteria")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @Operation(summary = "Search for the book", description
+                    = "Search for book in the library's collection based on the specified criteria")
     public List<BookResponseDto> search(BookSearchParametersDto bookSearchParameters) {
         return bookService.search(bookSearchParameters);
     }
@@ -79,8 +86,6 @@ public class BookController {
     @Operation(summary = "Delete book. <ONLY FOR ADMIN ROLE>",
             description = "Remove a specific book from the library's collection")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @ApiResponse(responseCode = "204",
-            description = "Book deleted successfully")
     public void deleteBook(@PathVariable Long id) {
         bookService.delete(id);
     }

@@ -1,4 +1,5 @@
 package book.store.app.bookstoreapp.config;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 import book.store.app.bookstoreapp.security.JwtAuthenticationFilter;
@@ -30,7 +31,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity security)
+            throws Exception {
         return security
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)

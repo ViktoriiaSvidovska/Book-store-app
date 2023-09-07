@@ -1,11 +1,18 @@
 package book.store.app.bookstoreapp.model;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -14,8 +21,8 @@ import org.hibernate.annotations.Where;
 
 @Data
 @Entity
-@SQLDelete(sql = "UPDATE books SET is_deleted = TRUE WHERE id=?")
-@Where(clause = "is_deleted = false")
+@SQLDelete(sql = "UPDATE books SET is_deleted = true WHERE id=?")
+@Where(clause = "is_deleted=false")
 @Table(name = "books")
 public class Book {
     @Id
@@ -31,7 +38,7 @@ public class Book {
     private BigDecimal price;
     private String description;
     private String coverImage;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JoinTable(name = "book_category",
@@ -40,4 +47,5 @@ public class Book {
     private Set<Category> categories = new HashSet<>();
     @Column(nullable = false)
     private boolean isDeleted = false;
+
 }

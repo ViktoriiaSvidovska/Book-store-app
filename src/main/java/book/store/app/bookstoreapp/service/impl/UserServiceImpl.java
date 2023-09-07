@@ -1,7 +1,7 @@
 package book.store.app.bookstoreapp.service.impl;
 
-import book.store.app.bookstoreapp.dto.user.UserResponseDto;
 import book.store.app.bookstoreapp.dto.user.UserRegistrationRequestDto;
+import book.store.app.bookstoreapp.dto.user.UserResponseDto;
 import book.store.app.bookstoreapp.exception.RegistrationException;
 import book.store.app.bookstoreapp.mapper.UserMapper;
 import book.store.app.bookstoreapp.model.User;

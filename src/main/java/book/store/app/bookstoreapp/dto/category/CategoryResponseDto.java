@@ -1,9 +1,8 @@
 package book.store.app.bookstoreapp.dto.category;
 
 import book.store.app.bookstoreapp.model.Book;
-import lombok.Data;
-
 import java.util.Set;
+import lombok.Data;
 
 @Data
 public class CategoryResponseDto {

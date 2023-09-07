@@ -8,6 +8,5 @@ import org.mapstruct.NullValueCheckStrategy;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS
 )
-
 public class MapperConfig {
 }

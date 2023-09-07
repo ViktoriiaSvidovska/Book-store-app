@@ -1,9 +1,8 @@
 package book.store.app.bookstoreapp.dto.book;
 
-import lombok.Data;
-
 import java.math.BigDecimal;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BookResponseDto {
