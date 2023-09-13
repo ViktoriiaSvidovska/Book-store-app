@@ -182,6 +182,7 @@
                     <linkXRef>false</linkXRef>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>

@@ -1,4 +1,4 @@
-package book.store.app.bookstoreapp.repository;
+package book.store.app.bookstoreapp.repository.category;
 
 import book.store.app.bookstoreapp.model.Book;
 import book.store.app.bookstoreapp.model.Category;

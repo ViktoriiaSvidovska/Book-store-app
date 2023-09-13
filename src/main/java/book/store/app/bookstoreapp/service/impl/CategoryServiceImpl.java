@@ -7,7 +7,7 @@ import book.store.app.bookstoreapp.exception.EntityNotFoundException;
 import book.store.app.bookstoreapp.mapper.BookMapper;
 import book.store.app.bookstoreapp.mapper.CategoryMapper;
 import book.store.app.bookstoreapp.model.Category;
-import book.store.app.bookstoreapp.repository.CategoryRepository;
+import book.store.app.bookstoreapp.repository.category.CategoryRepository;
 import book.store.app.bookstoreapp.service.CategoryService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

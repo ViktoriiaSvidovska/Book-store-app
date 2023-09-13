@@ -1,7 +1,7 @@
 package book.store.app.bookstoreapp.security;
 
 import book.store.app.bookstoreapp.exception.RegistrationException;
-import book.store.app.bookstoreapp.repository.UserRepository;
+import book.store.app.bookstoreapp.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
