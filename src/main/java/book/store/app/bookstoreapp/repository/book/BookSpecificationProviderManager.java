@@ -1,9 +1,9 @@
-package book.store.app.bookstoreapp.dto.book;
+package book.store.app.bookstoreapp.repository.book;
 
-import java.util.List;
 import book.store.app.bookstoreapp.model.Book;
 import book.store.app.bookstoreapp.repository.SpecificationProvider;
 import book.store.app.bookstoreapp.repository.SpecificationProviderManager;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +18,7 @@ public class BookSpecificationProviderManager implements SpecificationProviderMa
                 .stream()
                 .filter(p -> p.getKey().equals(key))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Can't find specification provider for key parameter: " + key));
+                .orElseThrow(() -> new RuntimeException("Can't find specification "
+                        + "provider for key parameter: " + key));
     }
 }

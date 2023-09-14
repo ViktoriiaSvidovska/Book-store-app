@@ -1,6 +1,5 @@
 package book.store.app.bookstoreapp.dto.user;
 
-
 import book.store.app.bookstoreapp.lib.FieldMatch;
 import book.store.app.bookstoreapp.lib.Password;
 import jakarta.validation.constraints.Email;
@@ -35,6 +34,7 @@ public class UserRegistrationRequestDto {
     private String lastName;
 
     @NotBlank(message = "Shipping address is required")
-    @Size(min = 5, max = 100, message = "Shipping address length must be between 5 and 90 characters")
+    @Size(min = 5, max = 100,
+            message = "Shipping address length must be between 5 and 90 characters")
     private String shippingAddress;
 }

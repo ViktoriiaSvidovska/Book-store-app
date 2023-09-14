@@ -1,10 +1,10 @@
-package book.store.app.bookstoreapp.dto.book;
+package book.store.app.bookstoreapp.repository.book;
 
 import book.store.app.bookstoreapp.model.Book;
 import book.store.app.bookstoreapp.repository.SpecificationProvider;
+import java.util.Arrays;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import java.util.Arrays;
 
 @Component
 public class AuthorSpecificationProvider implements SpecificationProvider<Book> {
