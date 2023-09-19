@@ -1,6 +1,6 @@
 package book.store.app.bookstoreapp.service.impl;
 
-import book.store.app.bookstoreapp.dto.book.BookDtoWithoutCategoryIds;
+import book.store.app.bookstoreapp.dto.book.BookDtoNoCategory;
 import book.store.app.bookstoreapp.dto.category.CategoryResponseDto;
 import book.store.app.bookstoreapp.dto.category.CreateCategoryRequestDto;
 import book.store.app.bookstoreapp.exception.EntityNotFoundException;
@@ -23,31 +23,28 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryResponseDto> findAll(Pageable pageable) {
-        return categoryRepository
-                .findAll(pageable)
-                .stream()
-                .map(categoryMapper::toDto)
-                .toList();
+        return categoryRepository.findAll(pageable).stream()
+                .map(categoryMapper::toDto).toList();
     }
 
     @Override
     public CategoryResponseDto getById(Long id) {
         return categoryMapper.toDto(categoryRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Can't find category by id: " + id)));
+                new EntityNotFoundException("Can't get category by id: " + id)));
     }
 
     @Override
-    public CategoryResponseDto save(CreateCategoryRequestDto createCategoryRequestDto) {
-        return categoryMapper.toDto(categoryRepository
-                .save(categoryMapper.toModel(createCategoryRequestDto)));
+    public CategoryResponseDto save(CreateCategoryRequestDto categoryDto) {
+        return categoryMapper.toDto(categoryRepository.save(categoryMapper
+                .toModel(categoryDto)));
     }
 
     @Override
-    public CategoryResponseDto update(Long id, CreateCategoryRequestDto createCategoryRequestDto) {
+    public CategoryResponseDto update(Long id, CreateCategoryRequestDto categoryDto) {
         if (!categoryRepository.existsById(id)) {
-            throw new EntityNotFoundException("Can't find category by id: " + id);
+            throw new EntityNotFoundException("Can't update category by id: " + id);
         }
-        Category category = categoryMapper.toModel(createCategoryRequestDto);
+        Category category = categoryMapper.toModel(categoryDto);
         category.setId(id);
         return categoryMapper.toDto(categoryRepository.save(category));
     }
@@ -55,18 +52,17 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteById(Long id) {
         if (!categoryRepository.existsById(id)) {
-            throw new EntityNotFoundException("Can't delete category by id: " + id);
+            throw new EntityNotFoundException("Can't delete book by id: " + id);
         }
         categoryRepository.deleteById(id);
     }
 
     @Override
-    public List<BookDtoWithoutCategoryIds> getBooksByCategoriesId(Long id) {
+    public List<BookDtoNoCategory> getBooksByCategoriesId(Long id) {
         if (!categoryRepository.existsById(id)) {
-            throw new EntityNotFoundException("Can't find category by id: " + id);
+            throw new EntityNotFoundException("Category not found: " + id);
         }
-        return categoryRepository
-                .getBooksByCategoriesId(id).stream()
+        return categoryRepository.getBooksByCategoriesId(id).stream()
                 .map(bookMapper::toDtoWithoutCategories)
                 .toList();
     }
