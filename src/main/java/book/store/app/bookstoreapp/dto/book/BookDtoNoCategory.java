@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-public class BookDtoWithoutCategoryIds {
+public class BookDtoNoCategory {
     private Long id;
     private String title;
     private String author;

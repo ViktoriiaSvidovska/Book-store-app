@@ -1,6 +1,6 @@
 package book.store.app.bookstoreapp.controller;
 
-import book.store.app.bookstoreapp.dto.book.BookDtoWithoutCategoryIds;
+import book.store.app.bookstoreapp.dto.book.BookDtoNoCategory;
 import book.store.app.bookstoreapp.dto.category.CategoryResponseDto;
 import book.store.app.bookstoreapp.dto.category.CreateCategoryRequestDto;
 import book.store.app.bookstoreapp.service.CategoryService;
@@ -46,7 +46,7 @@ public class CategoryController {
     @Operation(summary = "Create a new category. <ONLY FOR ADMIN ROLE>",
             description
                     = "Add a new category to the library's collection with the provided details")
-    @ApiResponse(responseCode = "201", description = "Category created successfully",
+    @ApiResponse(responseCode = "201", description = "Category created",
             content = {
                 @Content(mediaType = "application/json",
                     schema = @Schema(implementation = CategoryResponseDto.class))})
@@ -61,7 +61,7 @@ public class CategoryController {
             description = "Update information about the specific book category "
                     + "in the library's collection")
     @ApiResponse(responseCode = "200", description
-            = "Category was updated successfully", content = {
+            = "Category was updated", content = {
                 @Content(mediaType = "application/json",
                     schema = @Schema(implementation = CategoryResponseDto.class))})
     public CategoryResponseDto updateCategory(@PathVariable Long id,
@@ -82,7 +82,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(summary = "Get list of books by category id",
             description = "Get ist of books from the library's collection by category id")
-    public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(@PathVariable Long id) {
+    public List<BookDtoNoCategory> getBooksByCategoryId(@PathVariable Long id) {
         return categoryService.getBooksByCategoriesId(id);
     }
 
@@ -91,6 +91,8 @@ public class CategoryController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete category. <ONLY FOR ADMIN ROLE>",
             description = "Remove category from the library's collection")
+    @ApiResponse(responseCode = "204",
+            description = "Category deleted")
     public void deleteBook(@PathVariable Long id) {
         categoryService.deleteById(id);
     }
