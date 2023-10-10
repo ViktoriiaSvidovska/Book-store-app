@@ -13,7 +13,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: v/book-store-app
+    image: atiukhtii/book-wonders
     restart: unless-stopped
     build: .
     env_file: ./.env

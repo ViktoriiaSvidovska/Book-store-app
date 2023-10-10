@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: creat-category-table
+      id: create-category-table
       author: v
       changes:
         - createTable:
